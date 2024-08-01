@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/go-playground/validator/v10"
+	"github.com/prometheus/client_golang/prometheus"
 
 	"github.com/hngprojects/hng_boilerplate_golang_web/cronjobs"
 	"github.com/hngprojects/hng_boilerplate_golang_web/external/request"
@@ -18,11 +19,28 @@ import (
 	"github.com/hngprojects/hng_boilerplate_golang_web/utility"
 )
 
+// Initialize Prometheus metrics
+var (
+	cpuTemp = prometheus.NewGauge(prometheus.GaugeOpts{
+		Name: "cpu_temperature_celsius",
+		Help: "Current temperature of the CPU.",
+	})
+)
+
+func init() {
+	prometheus.MustRegister(cpuTemp)
+}
+
 func main() {
+
+	cpuTemp.Set(65.3)
+
 	logger := utility.NewLogger() //Warning !!!!! Do not recreate this action anywhere on the app
 	configuration := config.Setup(logger, "./app")
+
 	postgresql.ConnectToDatabase(logger, configuration.Database)
 	redis.ConnectToRedis(logger, configuration.Redis)
+
 	validatorRef := validator.New()
 
 	db := storage.Connection()
@@ -36,6 +54,8 @@ func main() {
 	}
 
 	r := router.Setup(logger, validatorRef, db, &configuration.App)
+	r.GET("/metrics", router.PrometheusHandler())
+
 	utility.LogAndPrint(logger, fmt.Sprintf("Server is starting at 127.0.0.1:%s", configuration.Server.Port))
 	log.Fatal(r.Run(":" + configuration.Server.Port))
 }
