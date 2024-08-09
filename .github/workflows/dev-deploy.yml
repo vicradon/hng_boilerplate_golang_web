@@ -41,7 +41,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Create app.env file
-        uses: vicradon/create-env-action@v0.0.1
+        uses: vicradon/create-env-action@v0.0.2
         with:
           APP_NAME: "development"
           APP_URL: "https://deployment.api-golang.boilerplate.hng.tech"
