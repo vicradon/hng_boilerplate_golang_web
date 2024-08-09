@@ -38,6 +38,8 @@ jobs:
       SSH_HOST: ${{ secrets.SSH_HOST }}
       SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
       - name: Create app.env file
         uses: ./.github/actions/create-env-action/
         with:
