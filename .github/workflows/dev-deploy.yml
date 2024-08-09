@@ -41,7 +41,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Create app.env file
-        uses: vicradon/create-env-action@v0.0.6
+        uses: vicradon/create-env-action@v0.0.7
         with:
           action_input_file: "app-sample.env"
           APP_NAME: "development"
