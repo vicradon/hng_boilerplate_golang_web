@@ -41,8 +41,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Create app.env file
-        uses: vicradon/create-env-action@v0.0.2
+        uses: vicradon/create-env-action@v0.0.3
         with:
+          ACTION_INPUT_FILE: "app-sample.env"
           APP_NAME: "development"
           APP_URL: "https://deployment.api-golang.boilerplate.hng.tech"
           SERVER_PORT: ${{ secrets.SERVER_PORT }}
@@ -80,9 +81,8 @@ jobs:
       SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
       SSH_HOST: ${{ secrets.SSH_HOST }}
       SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
-
     steps:
-      - name: Update app with latest changes
+      - name: Restart containers
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ env.HOST }}
@@ -92,14 +92,6 @@ jobs:
             cd ~/deployments/development
             git reset --hard
             git pull origin dev
-
-      - name: Restart containers
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ env.HOST }}
-          username: ${{ env.USERNAME }}
-          password: ${{ env.PASSWORD }}
-          script: |
             gunzip -c /tmp/golang_dev.tar.gz | docker load
             rm -f /tmp/golang_dev.tar.gz
             docker compose -f docker-compose.yml up -d
