@@ -39,7 +39,7 @@ jobs:
       SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
     steps:
       - name: Create app.env file
-        uses: .github/actions/create-env-action/
+        uses: ./.github/actions/create-env-action/
         with:
           APP_NAME: "development"
           APP_URL: "https://deployment.api-golang.boilerplate.hng.tech"
