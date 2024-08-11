@@ -62,7 +62,7 @@ jobs:
           SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
           MAIL_SERVER: ${{ secrets.MAIL_SERVER }}
           MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
-          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+          MAIL_PASSWORD: "${{ secrets.MAIL_PASSWORD }}"
           MAIL_PORT: ${{ secrets.MAIL_PORT }}
           MIGRATE: "true"
 
