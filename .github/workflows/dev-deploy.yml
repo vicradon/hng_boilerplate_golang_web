@@ -48,7 +48,7 @@ jobs:
           APP_NAME: "development"
           APP_URL: "https://deployment.api-golang.boilerplate.hng.tech"
           SERVER_PORT: 4500
-          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_NAME: "some-db"
           USERNAME: ${{ secrets.USERNAME }}
           REDIS_PORT: ${{ secrets.REDIS_PORT }}
           REDIS_HOST: ${{ secrets.REDIS_HOST }}
