@@ -44,6 +44,7 @@ jobs:
         uses: vicradon/create-env-action@v0.0.9
         with:
           action_input_file: "app-sample.env"
+          action_output_file: "app.env"
           APP_NAME: "development"
           APP_URL: "https://deployment.api-golang.boilerplate.hng.tech"
           SERVER_PORT: ${{ secrets.SERVER_PORT }}
