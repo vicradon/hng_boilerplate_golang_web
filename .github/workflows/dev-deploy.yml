@@ -47,6 +47,7 @@ jobs:
           action_output_file: "app.env"
           action_true_string_variables: |
             MAIL_PASSWORD
+            BRO_TENACIOUS
           APP_NAME: "development"
           APP_URL: "https://deployment.api-golang.boilerplate.hng.tech"
           SERVER_PORT: 4500
