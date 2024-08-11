@@ -65,6 +65,7 @@ jobs:
           MAIL_PASSWORD: "${{ secrets.MAIL_PASSWORD }}"
           MAIL_PORT: ${{ secrets.MAIL_PORT }}
           MIGRATE: "true"
+          BRO_TENACIOUS: "MF3940"
 
       - name: Copy app.env to server
         uses: appleboy/scp-action@v0.1.7
